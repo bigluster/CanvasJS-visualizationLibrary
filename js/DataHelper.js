@@ -1,7 +1,10 @@
-function singleDimension(layout,dimensionLabels,measureLabels) {
+var Gapp=null;
+
+function singleDimension(layout,dimensionLabels,measureLabels,app) {
 	// body...
 
 	var newMatrix = [];
+	Gapp = app;
 
 
 		// I'm going to loop over the first dimension
@@ -24,14 +27,15 @@ function singleDimension(layout,dimensionLabels,measureLabels) {
 }
 
 
-function doubleDimension (layout,dimensionLabels,measureLabels) {
+function doubleDimension (layout,dimensionLabels,measureLabels,app) {
     
 
     var data = [];
     var tmpRow = [];
     var newMatrix = [];
+    Gapp = app;
 
-    console.log(layout);
+    //console.log(layout);
 
 		// I'm going to loop over the first dimension
 	var colors=[];
@@ -55,7 +59,8 @@ function doubleDimension (layout,dimensionLabels,measureLabels) {
 		        	                            colors[dimNum++],
 		        	                            1, 
 		        	                            1,
-		        	                            layout.chart
+		        	                            layout.chart,
+		        	                            app
 		        	                            );
 		        newMatrix.push(SingleData);
 	        }
@@ -80,21 +85,27 @@ function doubleDimension (layout,dimensionLabels,measureLabels) {
 }
 
 
-function makeSingleDimension (ArrayValue, dimName, color,numDim, numMes, chartType) {
+function makeSingleDimension (ArrayValue, dimName, color,numDim, numMes, chartType,app) {
 
-	//console.log(dimName);
-	console.log(chartType);
+	
 
 	var data={};
 
+		if((chartType == 'pie') || (chartType=='doughnut'))
+			var data = {
+				type: chartType,
+				dataPoints: []
+			};
+		else
+			var data = {
+				type: chartType,
+				click: onClick,
+				name: dimName,
+				showInLegend: true,
+				color: color,
+				dataPoints: []
+			};
 
-		var data = {
-			type: chartType,
-			name: dimName,
-			showInLegend: true,
-			color: color,
-			dataPoints: []
-		};
 
 		$.each(ArrayValue, function(key, row){
 
@@ -110,10 +121,24 @@ function makeSingleDimension (ArrayValue, dimName, color,numDim, numMes, chartTy
 				mes.push(row[i].qText);
 			}
 
-			var myData = {y: mes[0]/1, label : dim[numDim-1]};
-				data.dataPoints.push(myData);
+			if((chartType == 'pie') || (chartType=='doughnut')) {
+				var myData = {y: mes[0]/1, indexLabel : dim[numDim-1]};
+			}
+			else
+				var myData = {y: mes[0]/1, label : dim[numDim-1]};
+
+
+			data.dataPoints.push(myData);
 		});
 
 	return data;
 }
 
+
+
+	function onClick(e) {
+		//alert(  e.dataSeries.type + ", dataPoint { x:" + e.dataPoint.x + ", y: "+ e.dataPoint.y + " }" );
+		//me.app.backendApi.selectValues(0, [0,1], false);
+		Gapp.clearAll();
+		Gapp.backendApi.selectValues(0, [0,1], false);
+	}
