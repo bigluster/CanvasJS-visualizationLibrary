@@ -5,10 +5,10 @@
 	"type": "visualization",
 	"version": "1.0.0",
 	"author": "ves",
-	"homepage": "",
+	"homepage": "https://github.com/expovin",
 	"keywords": "qlik-sense, visualization",
 	"license": "",
-	"repository": "",
+	"repository": "https://github.com/expovin/CanvasJS-visualizationLibrary",
 	"dependencies": {
 		"qlik-sense": ">=3.0.x"
 	}

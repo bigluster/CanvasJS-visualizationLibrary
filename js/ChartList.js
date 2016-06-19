@@ -24,14 +24,16 @@ var chartList =
 		}, {
 			value: "splineArea",
 			label: "Spline Area Chart"
-		}, {
+		}, 
+/*
+		{
 			value: "pie",
 			label: "Pie Chart"
 		}, {
 			value: "doughnut",
 			label: "Doughnut Chart"
 		}, 
-/*		{
+		{
 			value: "bubble",
 			label: "Bubble Chart"
 		}, 

@@ -17,7 +17,7 @@ define( [
 				qMeasures: [],
 				qInitialDataFetch: [{
 					qWidth: 4,
-					qHeight: 500
+					qHeight: 1000
 				}]
 			}
 		},
@@ -247,8 +247,6 @@ define( [
 			$element.append($('<div />;').attr("id", layout.qInfo.qId));
 			$("#"+layout.qInfo.qId).css("height", "100%");
 		
-			console.log(layout);
-
 			var mychart =  {
 						toolTip: { enabled: layout.tooltip },
 			        	title:
@@ -317,10 +315,10 @@ define( [
 
 				
 
-				mychart.data = newDataMatrix;
-
+			mychart.data = newDataMatrix;
 
 			var chart = new CanvasJS.Chart(layout.qInfo.qId,mychart);
+			//console.log(mychart);
 		
 			chart.render();
 
