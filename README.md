@@ -1,6 +1,7 @@
 # CanvasJS-visualizationLibrary
 
-This extension object contain a number of visualization chart form [CanvasJS](http://canvasjs.com/). It's possible to use up to 2 dimensions and 1 measure. The chart included in this version are:
+This extension object contain a number of visualization chart form [CanvasJS](http://canvasjs.com/). It's possible to use up to 2 dimensions and up to 2 measure. You can run 2 dimensions and 1 measure or 1 dimension ad 2 measures. This version do not control how many measures and dimensions you're using, it's up to you the correct use.
+The chart included in this version are:
  * Area Chart
  * Bar Chart
  * Column Chart
