@@ -4,12 +4,12 @@ define( [
 			"css!./CanvasJS-visualizationLibrary.css",
 			"./js/canvasjs.min",
 			"./js/DataHelper",
-			"./js/ChartList"
+			"./js/ChartList",
+			"./js/ExtensionProperties"
 		], function ( qlik, template ) {
 		"use strict";
 		
-	var me = 	
-	{
+	var me = {
 		initialProperties: {
 			version: 1.2,
 			qHyperCubeDef: {
@@ -71,6 +71,20 @@ define( [
                                         label: "Off"
 							        }],
 									defaultValue: true
+								},
+								SecondAxisCheckbox: {
+									type: "boolean",
+									component: "switch",
+									label: "Second Axis",
+									ref: "secondaxis",
+                                    options: [{
+                                        value: true,
+                                        label: "On"
+									}, {
+                                       value: false,
+                                        label: "Off"
+							        }],
+									defaultValue: false
 								},
 								ToolTipCheckbox: {
 									type: "boolean",
@@ -222,7 +236,7 @@ define( [
 									type: "string",
 									expression: "none",
 									label: "Fill color Separated by comma if stacked bar. If Empty, use default Sense palette",
-									defaultValue: "##00FFCD, #4CE5C7, #4CCCB3, #339985, #337F70, #33665C, #194C42, #19332E, #191919, #000000",
+									defaultValue: "#91FF00, #A7FF33, #BDFF66, #D3FF99, #DEFF92, #F4FFE5, #FFFFFF00",
 									ref: "vars.bar.fillColor"
 								},
 							},
@@ -232,7 +246,8 @@ define( [
 				}
 			}
 		}
-	};
+	};	
+
 	
 		// Get Engine API app for Selections
 	me.app = qlik.currApp(this);
@@ -243,6 +258,7 @@ define( [
 	
 
 		me.paint = function($element,layout) {
+
 		    
 			$element.append($('<div />;').attr("id", layout.qInfo.qId));
 			$("#"+layout.qInfo.qId).css("height", "100%");
@@ -308,17 +324,23 @@ define( [
 
                 var newDataMatrix;
 
-                if (dimensionLabels.length > 1)
-                	newDataMatrix = doubleDimension (layout,dimensionLabels,measureLabels,me.app);
-                else
-                    newDataMatrix = singleDimension(layout,dimensionLabels,measureLabels,me.app);
+                if((measureLabels.length > 1) &&(layout.secondaxis))
+                	newDataMatrix =  doubleMeasure (layout,dimensionLabels,measureLabels,me.app);
+                else {
+
+	                if (dimensionLabels.length > 1)
+	                	newDataMatrix = doubleDimension (layout,dimensionLabels,measureLabels,me.app);
+	                else 
+	                		newDataMatrix = singleDimension(layout,dimensionLabels,measureLabels,me.app);
+                
+                }
 
 				
 
 			mychart.data = newDataMatrix;
 
 			var chart = new CanvasJS.Chart(layout.qInfo.qId,mychart);
-			//console.log(mychart);
+			console.log(mychart);
 		
 			chart.render();
 
