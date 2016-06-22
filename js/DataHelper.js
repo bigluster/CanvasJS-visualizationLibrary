@@ -151,7 +151,6 @@ function makeSingleDimension (ArrayValue, dimName, color,numDim, numMes, chartTy
 		else
 			var data = {
 				type: chartType,
-				click: onClick,
 				name: dimName,
 				toolTipContent: "<strong>{name}</strong> {y} ({label})",
 				showInLegend: true,
