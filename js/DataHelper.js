@@ -3,8 +3,6 @@ var Gapp=null;
 function singleDimension(layout,dimensionLabels,measureLabels,app) {
 	// body...
 
-	console.log("Sono nella singleDimension"); 
-
 	var newMatrix = [];
 	var newMatrix = [];
 	Gapp = app;
@@ -98,13 +96,10 @@ function doubleDimension (layout,dimensionLabels,measureLabels,app) {
 
 
 function doubleMeasure(layout,dimensionLabels,measureLabels,app){
-	console.log("Sono nella doubleMeasure"); 
 
 	var newMatrix = [];
 	Gapp = app;
 
-
-		console.log(layout);
 		// I'm going to loop over the first dimension
 		var colors=[];
 		colors = layout.vars.bar.fillColor.split(",");
@@ -132,7 +127,6 @@ function doubleMeasure(layout,dimensionLabels,measureLabels,app){
 
 
         secondAxix['axisYType']="secondary";
-        console.log(secondAxix);
 
 		newMatrix.push(data);
 		newMatrix.push(secondAxix);
@@ -181,7 +175,7 @@ function makeSingleDimension (ArrayValue, dimName, color,numDim, numMes, chartTy
 			}
 
 			if((chartType == 'pie') || (chartType=='doughnut')) {
-				var myData = {y: mes[mesOrd]/1, indexLabel : dim[numDim-1]};
+				var myData = {y: mes[mesOrd]/1, indexLabel : dim[ordDim], legendText:dim[ordDim]};
 			}
 			else
 			{
@@ -194,11 +188,14 @@ function makeSingleDimension (ArrayValue, dimName, color,numDim, numMes, chartTy
 	return data;
 }
 
-
+/*
 
 	function onClick(e) {
 		//alert(  e.dataSeries.type + ", dataPoint { x:" + e.dataPoint.x + ", y: "+ e.dataPoint.y + " }" );
 		//me.app.backendApi.selectValues(0, [0,1], false);
-		Gapp.clearAll();
-		Gapp.backendApi.selectValues(0, [0,1], false);
+		//Gapp.clearAll();
+		console.log(e);
+		console.log(e.dataPoint.x);
+		Gapp.backendApi.selectValues(0, [3-e.dataPoint.x], true);
 	}
+	*/

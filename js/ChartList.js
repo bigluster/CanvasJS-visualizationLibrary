@@ -25,7 +25,7 @@ var chartList =
 			value: "splineArea",
 			label: "Spline Area Chart"
 		}, 
-/*
+
 		{
 			value: "pie",
 			label: "Pie Chart"
@@ -33,6 +33,7 @@ var chartList =
 			value: "doughnut",
 			label: "Doughnut Chart"
 		}, 
+		/*
 		{
 			value: "bubble",
 			label: "Bubble Chart"

@@ -259,6 +259,12 @@ define( [
 
 		me.paint = function($element,layout) {
 
+			 var self = this;
+			 /*
+                self.backendApi.getMeasureInfos().forEach(function(value, col) {
+                    console.log(value);
+				});
+*/
 		    
 			$element.append($('<div />;').attr("id", layout.qInfo.qId));
 			$("#"+layout.qInfo.qId).css("height", "100%");
@@ -325,22 +331,20 @@ define( [
                 var newDataMatrix;
 
                 if((measureLabels.length > 1) &&(layout.secondaxis))
-                	newDataMatrix =  doubleMeasure (layout,dimensionLabels,measureLabels,me.app);
+                	newDataMatrix =  doubleMeasure (layout,dimensionLabels,measureLabels,self);
                 else {
 
 	                if (dimensionLabels.length > 1)
-	                	newDataMatrix = doubleDimension (layout,dimensionLabels,measureLabels,me.app);
+	                	newDataMatrix = doubleDimension (layout,dimensionLabels,measureLabels,self);
 	                else 
-	                		newDataMatrix = singleDimension(layout,dimensionLabels,measureLabels,me.app);
-                
+	                		newDataMatrix = singleDimension(layout,dimensionLabels,measureLabels,self);
                 }
 
 				
 
 			mychart.data = newDataMatrix;
 
-			var chart = new CanvasJS.Chart(layout.qInfo.qId,mychart);
-			console.log(mychart);
+			var chart = new CanvasJS.Chart(layout.qInfo.qId,mychart);			
 		
 			chart.render();
 
